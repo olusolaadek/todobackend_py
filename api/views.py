@@ -77,7 +77,7 @@ def login(request):
         return JsonResponse({'error': 'Unable to login. Check username and password'}, status=400)
     else:  # return user token
         try:
-            token = token.objects.get_or_create(user=user)
+            token = token.objects.get(user=user)
         except Exception:  # if token not in db, create a new one
-            token = Token.objects.create(user=user)
+            token = Token.objects.get_or_create(user=user)
     return JsonResponse({'token': str(token)}, status=201)
