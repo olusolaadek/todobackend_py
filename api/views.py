@@ -20,7 +20,7 @@ class TodoListCreate(generics.ListCreateAPIView):
 
     def get_queryset(self):
         user = self.request.user
-        return Todo.objects.filter(user=user).order_by('-created')
+        return Todo.objects.filter(user=user).order_by('completed')
 
     def perform_create(self, serializer):
         # serializer holds a django model
@@ -34,7 +34,7 @@ class TodoRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
     def get_queryset(self):
         user = self.request.user
         # user can only update, delete own posts
-        return Todo.objects.filter(user=user)
+        return Todo.objects.filter(user=user)  #
 
 
 class TodoToggleComplete(generics.UpdateAPIView):
@@ -43,7 +43,7 @@ class TodoToggleComplete(generics.UpdateAPIView):
 
     def get_queryset(self):
         user = self.request.user
-        return Todo.objects.filter(user=user)
+        return Todo.objects.filter(user=user).order_by("-completed")
 
     def perform_update(self, serializer):
         serializer.instance.completed = not (serializer.instance.completed)
