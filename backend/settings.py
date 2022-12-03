@@ -61,7 +61,7 @@ MIDDLEWARE = [
 ]
 
 CORS_ORIGIN_WHITELIST = [
-    'http://localhost:3000',
+    'http://localhost:3000',  # https://luminous-longma-a7296a.netlify.app
 ]
 
 
